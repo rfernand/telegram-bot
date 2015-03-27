@@ -6,7 +6,13 @@ end
 return {
     description = "Fills screen with NSFW messages",
     usage = "!nsfw",
-    patterns = {"^!nsfw$"}, 
+    patterns = {
+      "^!nsfw$",
+      "^!NSFW$",
+      "^!ns$",
+      "^!NS$",
+      "^!clear$"
+      }, 
     run = run 
 }
 
