@@ -164,6 +164,7 @@ function create_config( )
       "9gag",
       "eur",
       "echo",
+      "nsfw",
       "btc",
       "get",
       "giphy",
