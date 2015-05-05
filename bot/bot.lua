@@ -176,6 +176,7 @@ function create_config( )
       "location",
       "media",
       "plugins",
+      "router_status", 
       "set",
       "stats",
       "time",
