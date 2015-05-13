@@ -31,7 +31,7 @@ function getGoogleImage(text, attempt)
         "test",
         "sexy"
       }
-      local new_text = text+" "+ GetRandomMessage(random_strings)
+      local new_text = text.." "..GetRandomElement(random_strings)
       return getGoogleImage(new_text, attempt)
     else
       return nil
