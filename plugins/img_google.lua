@@ -1,6 +1,13 @@
 do
 
-function getGoogleImage(text)
+function GetRandomElement(a)
+    return a[math.random(#a)]
+end
+
+function getGoogleImage(text, attempt)
+  attempt = attempt or 0
+  attempt = attempt + 1
+
   local text = URL.escape(text)
   local api = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&rsz=8&q="
   local res, code = http.request(api..text)
@@ -12,8 +19,24 @@ function getGoogleImage(text)
   end
 
   -- Google response Ok
-  local i = math.random(#google.responseData.results) -- Random image from results
-  return google.responseData.results[i].url
+  if #google.responseData.results > 0 then
+    local i = math.random(#google.responseData.results) -- Random image from results
+    return google.responseData.results[i].url
+  else
+    if attempt < 10 then
+      local random_strings = {
+        "butts",
+        "boobs",
+        "nude",
+        "test",
+        "sexy"
+      }
+      local new_text = text+" "+ GetRandomMessage(random_strings)
+      return getGoogleImage(new_text, attempt)
+    else
+      return nil
+    end
+  end
 
 end
 
@@ -42,7 +65,7 @@ function run(msg, matches)
   local text = msg.text:sub(6,-1)
   local url = getGoogleImage(text)
   print("Image URL: ", url)
-  send_photo_from_url_with_retry(receiver, url)
+  send_photo_from_url(receiver, url)
 end
 
 return {

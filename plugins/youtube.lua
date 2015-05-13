@@ -21,6 +21,12 @@ function send_youtube_data(data, receiver)
   --local text = title..' ('..uploader..')\n'..description
   local messages = {
     "Mala tu wea de video",
+    ":O",
+    "Wena wn",
+    "Ah también lo vi",
+    "jajajajajaj",
+    "#trendingtopic",
+    "afk",
     ":slowpoke:",
     "HAHAHAHAHHAHAHAHAHHAH fome tu wea"
   }
