@@ -6,10 +6,10 @@ do
 local BASE_URL = 'http://api.giphy.com/v1'
 local API_KEY = 'dc6zaTOxFJmzC' -- public beta key
 
-function get_image(response)
+local function get_image(response)
   local images = json:decode(response).data
   if #images == 0 then return nil end -- No images
-  local i = math.random(0,#images)
+  local i = math.random(#images)
   local image =  images[i] -- A random one
 
   if image.images.downsized then
@@ -23,14 +23,14 @@ function get_image(response)
   return nil
 end
 
-function get_random_top()
+local function get_random_top()
   local url = BASE_URL.."/gifs/trending?api_key="..API_KEY
   local response, code = http.request(url)
   if code ~= 200 then return nil end
   return get_image(response)
 end
 
-function search(text)
+local function search(text)
   text = URL.escape(text)
   local url = BASE_URL.."/gifs/search?q="..text.."&api_key="..API_KEY
   local response, code = http.request(url)
@@ -38,10 +38,10 @@ function search(text)
   return get_image(response)
 end
 
-function run(msg, matches)
+local function run(msg, matches)
   local gif_url = nil
   
-  -- If no search data, a random trending GIF will be sended
+  -- If no search data, a random trending GIF will be sent
   if matches[1] == "!gif" or matches[1] == "!giphy" then
     gif_url = get_random_top()
   else
@@ -53,8 +53,9 @@ function run(msg, matches)
   end
 
   local receiver = get_receiver(msg)
+  print("GIF URL"..gif_url)
+  
   send_document_from_url(receiver, gif_url)
-  return "Preparing to make you laugh"
 end
 
 return {

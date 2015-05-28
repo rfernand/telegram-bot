@@ -1,6 +1,7 @@
 do
 
-function getRandomButts(attempt)
+-- Recursive function
+local function getRandomButts(attempt)
   attempt = attempt or 0
   attempt = attempt + 1
 
@@ -10,15 +11,15 @@ function getRandomButts(attempt)
   local data = json:decode(res)[1]
 
   -- The OpenBoobs API sometimes returns an empty array
-  if not data and attempt < 10 then 
-    print('Cannot get that butts, trying another ones...')
+  if not data and attempt <= 3 then
+    print('Cannot get that butts, trying another one...')
     return getRandomButts(attempt)
   end
 
   return 'http://media.obutts.ru/' .. data.preview
 end
 
-function getRandomBoobs(attempt)
+local function getRandomBoobs(attempt)
   attempt = attempt or 0
   attempt = attempt + 1
 
@@ -29,14 +30,14 @@ function getRandomBoobs(attempt)
 
   -- The OpenBoobs API sometimes returns an empty array
   if not data and attempt < 10 then 
-    print('Cannot get that boobs, trying another ones...')
+    print('Cannot get that boobs, trying another one...')
     return getRandomBoobs(attempt)
   end
 
   return 'http://media.oboobs.ru/' .. data.preview
 end
 
-function run(msg, matches)
+local function run(msg, matches)
   local url = nil
   
   if matches[1] == "!boobs" then
@@ -58,8 +59,8 @@ end
 return {
   description = "Gets a random boobs or butts pic", 
   usage = {
-    "!boobs",
-    "!butts"
+    "!boobs: Get a boobs NSFW image. 🔞",
+    "!butts: Get a butts NSFW image. 🔞"
   },
   patterns = {
     "^!boobs$",
