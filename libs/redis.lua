@@ -1,5 +1,5 @@
-local Redis = require 'redis'
-local FakeRedis = require 'fakeredis'
+--local Redis = require 'redis'
+--local FakeRedis = require 'fakeredis'
 
 local params = {
   host = '127.0.0.1',
@@ -19,7 +19,7 @@ local redis = nil
 
 -- Won't launch an error if fails
 local ok = pcall(function()
-  redis = Redis.connect(params)
+  --redis = Redis.connect(params)
 end)
 
 if not ok then
@@ -28,7 +28,8 @@ if not ok then
     print('\27[31mCan\'t connect with Redis, install/configure it!\27[39m')
   end
   fake_func()
-  fake = FakeRedis.new()
+  --fake = FakeRedis.new() 
+  fake = nil
 
   print('\27[31mRedis addr: '..params.host..'\27[39m')
   print('\27[31mRedis port: '..params.port..'\27[39m')
